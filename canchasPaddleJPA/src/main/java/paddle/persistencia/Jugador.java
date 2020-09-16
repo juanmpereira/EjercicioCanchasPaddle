@@ -3,45 +3,42 @@ package paddle.persistencia;
 
 
 import java.sql.*;
+import java.util.List;
 
 import javax.persistence.*;
+
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 @Entity
 @Table(name="Jugador")
 public class Jugador {
-		
-	@Id
-	@GeneratedValue
-	private int id;
+	
+	@Id @GeneratedValue
+    private Long id;
 
+	@Column(name="jugador_nombre")
 	private String nombre;
 	
+	@Column(name="jugador_apellido")
 	private String apellido;
 	
+	@Column(name="jugador_direccion")
 	private String direccion;
 	
+	@Convert(converter=LocalDateConverter.class)
+	@Column(name="jugador_fecha_nacimiento")
 	private Date fechaNaciemiento;
 
 	@ManyToMany
-	@JoinTable(name="Participantes")
-	private Paleta paleta;
+	@JoinTable(name = "participantes")
+	private List<Paleta> paletas;
 
-	public Jugador(int id, String nombre, String apellido, String direccion, Date fechaNaciemiento, Paleta paleta) {
-		super();
-		this.id = id;
+	public Jugador(String nombre, String apellido, String direccion, Date fechaNaciemiento, List<Paleta> paletas) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
 		this.fechaNaciemiento = fechaNaciemiento;
-		this.paleta = paleta;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		this.paletas = paletas;
 	}
 
 	public String getNombre() {
@@ -76,12 +73,12 @@ public class Jugador {
 		this.fechaNaciemiento = fechaNaciemiento;
 	}
 
-	public Paleta getPaleta() {
-		return paleta;
+	public List<Paleta> getPaletas() {
+		return paletas;
 	}
 
 	public void setPaleta(Paleta paleta) {
-		this.paleta = paleta;
+		this.paletas = paletas;
 	}
 	
 	

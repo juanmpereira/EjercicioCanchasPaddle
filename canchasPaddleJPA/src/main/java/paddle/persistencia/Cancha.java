@@ -3,31 +3,22 @@ package paddle.persistencia;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Cancha")
+@Table(name = "cancha")
 public class Cancha {
 	
-	@Id
-	@GeneratedValue
-	private int id;
+	@Id @GeneratedValue
+    private Long id;
 	
+	@Column(name="cancha_ilumniacion")
 	private int tieneIluminacion;
 	
+	@Column(name="cancha_nombre")
 	private String nombre;
 	
 	@ManyToOne
 	private Color color;
 
 	
-	
-	
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getTieneIluminacion() {
 		return tieneIluminacion;

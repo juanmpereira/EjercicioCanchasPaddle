@@ -5,27 +5,27 @@ import java.lang.reflect.Constructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Paleta")
+@Table(name="paleta")
 public class Paleta {
 	
-	@Id
-	@GeneratedValue
-	private int id;
+	@Id @GeneratedValue
+    private Long id;
 	
 	@ManyToOne
 	private Color color;
 	
 	@ManyToOne
-	private Constructor constructor;
+	@JoinColumn(name="codigo")
+	private CreadorPaleta constructor;
 	
+	@Column(name="paleta_nombre")
 	private String nombre;
 	
+	@Column(name="paleta_grosor")
 	private double grosor;
 	
 
-	public Paleta(int id, Color color, Constructor constructor, String nombre, double grosor) {
-		super();
-		this.id = id;
+	public Paleta(Color color, CreadorPaleta constructor, String nombre, double grosor) {
 		this.color = color;
 		this.constructor = constructor;
 		this.nombre = nombre;
@@ -48,14 +48,6 @@ public class Paleta {
 		this.grosor = grosor;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Color getColor() {
 		return color;
 	}
@@ -64,11 +56,11 @@ public class Paleta {
 		this.color = color;
 	}
 
-	public Constructor getConstructor() {
+	public CreadorPaleta getConstructor() {
 		return constructor;
 	}
 
-	public void setConstructor(Constructor constructor) {
+	public void setConstructor(CreadorPaleta constructor) {
 		this.constructor = constructor;
 	}
 	

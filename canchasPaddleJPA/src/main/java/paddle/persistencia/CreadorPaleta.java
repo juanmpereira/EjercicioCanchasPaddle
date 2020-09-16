@@ -3,17 +3,19 @@ package paddle.persistencia;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Constructor")
-public class Constructor {
-		
+@Table(name="creador_paleta")
+public class CreadorPaleta {
+	
+	@Id
 	private int codigo;
 	
+	@Column(name="creador_nombre")
 	private String nombre;
 	
+	@Column(name="creador_domicilio")
 	private String domicilio;
 
-	public Constructor(int codigo, String nombre, String domicilio) {
-		super();
+	public CreadorPaleta(int codigo, String nombre, String domicilio) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.domicilio = domicilio;

@@ -2,73 +2,47 @@ package paddle.persistencia;
 
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="Partido")
-public class Partido {
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
-		@Id
-		@GeneratedValue
-		private int id;
+@Entity
+@Table(name="partido")
+public class Partido {
+	
+		@Id @GeneratedValue
+		private Long id;
 		
-		private Date inicio;
+		@Convert(converter=LocalDateConverter.class)
+		@Column(name="partido_inicio")
+		private LocalDate inicio;
 		
-		private Date fin;
+		@Convert(converter=LocalDateConverter.class)
+		@Column(name="partido_fin")
+		private LocalDate fin;
 		
 		@ManyToOne
 		private Cancha cancha;
 		
 		@ManyToMany
-		@JoinTable(name = "Participantes")
+		@JoinTable(name = "participantes")
 		private List<Jugador> jugadores;
 		
-		
+		@ManyToOne
 		private Jugador reservador;
 
 
-		public Partido(int id, Date inicio, Date fin, Cancha cancha, List<Jugador> jugadores, Jugador reservador) {
-			super();
-			this.id = id;
+		public Partido(Long id,LocalDate inicio, LocalDate fin, Cancha cancha, List<Jugador> jugadores, Jugador reservador) {
+			this.id=id;
 			this.inicio = inicio;
 			this.fin = fin;
 			this.cancha = cancha;
 			this.jugadores = jugadores;
 			this.reservador = reservador;
 		}
-
-
-		public int getId() {
-			return id;
-		}
-
-
-		public void setId(int id) {
-			this.id = id;
-		}
-
-
-		public Date getInicio() {
-			return inicio;
-		}
-
-
-		public void setInicio(Date inicio) {
-			this.inicio = inicio;
-		}
-
-
-		public Date getFin() {
-			return fin;
-		}
-
-
-		public void setFin(Date fin) {
-			this.fin = fin;
-		}
-
 
 		public Cancha getCancha() {
 			return cancha;

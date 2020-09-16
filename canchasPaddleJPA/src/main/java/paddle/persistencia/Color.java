@@ -6,22 +6,15 @@ import javax.persistence.*;
 //por tenerla en el DER pero q no tiene nada?
 
 @Entity
-@Table(name="Color")
+@Table(name="color")
 public class Color {
+		
+	@Id @GeneratedValue
+    private Long id;
 	
-	@Id
-	@GeneratedValue
-	private int id;
-	
+	@Column(name="color_desc")
 	private String descripcion;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getDescripcion() {
 		return descripcion;
