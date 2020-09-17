@@ -14,6 +14,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 public class Partido {
 	
 		@Id @GeneratedValue
+		@Column(name="partido_id")
 		private Long id;
 		
 		@Convert(converter=LocalDateConverter.class)
@@ -25,23 +26,25 @@ public class Partido {
 		private LocalDate fin;
 		
 		@ManyToOne
+		@JoinColumn(name="partido_cancha")
 		private Cancha cancha;
 		
-		@ManyToMany
-		@JoinTable(name = "participantes")
-		private List<Jugador> jugadores;
+		@OneToMany
+		@JoinColumn(name = "participante_partido")
+		private List<Participacion> participantes;	
 		
 		@ManyToOne
+		@JoinColumn(name="partido_reservador")
 		private Jugador reservador;
 
 
-		public Partido(Long id,LocalDate inicio, LocalDate fin, Cancha cancha, List<Jugador> jugadores, Jugador reservador) {
+		public Partido(Long id,LocalDate inicio, LocalDate fin, Cancha cancha, List<Participacion> participaciones, Jugador reservador) {
 			this.id=id;
 			this.inicio = inicio;
 			this.fin = fin;
 			this.cancha = cancha;
-			this.jugadores = jugadores;
 			this.reservador = reservador;
+			this.participantes= participaciones;
 		}
 
 		public Cancha getCancha() {
@@ -53,17 +56,6 @@ public class Partido {
 			this.cancha = cancha;
 		}
 
-
-		public List<Jugador> getJugadores() {
-			return jugadores;
-		}
-
-
-		public void setJugadores(List<Jugador> jugadores) {
-			this.jugadores = jugadores;
-		}
-
-
 		public Jugador getReservador() {
 			return reservador;
 		}
@@ -72,7 +64,13 @@ public class Partido {
 		public void setReservador(Jugador reservador) {
 			this.reservador = reservador;
 		}
-		
-		
+
+		public List<Participacion> getParticipantes() {
+			return participantes;
+		}
+
+		public void setParticipantes(List<Participacion> participantes) {
+			this.participantes = participantes;
+		}
 		
 }

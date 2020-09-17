@@ -8,14 +8,16 @@ import javax.persistence.*;
 @Table(name="paleta")
 public class Paleta {
 	
-	@Id @GeneratedValue
-    private Long id;
+	@Id 
+	@Column(name="paleta_codigo")
+    private int codigo;
 	
 	@ManyToOne
+	@JoinColumn(name="paleta_color")
 	private Color color;
 	
 	@ManyToOne
-	@JoinColumn(name="codigo")
+	@JoinColumn(name="paleta_constructor")
 	private CreadorPaleta constructor;
 	
 	@Column(name="paleta_nombre")
@@ -25,7 +27,8 @@ public class Paleta {
 	private double grosor;
 	
 
-	public Paleta(Color color, CreadorPaleta constructor, String nombre, double grosor) {
+	public Paleta(int codigo, Color color, CreadorPaleta constructor, String nombre, double grosor) {
+		this.codigo=codigo;
 		this.color = color;
 		this.constructor = constructor;
 		this.nombre = nombre;
@@ -62,6 +65,14 @@ public class Paleta {
 
 	public void setConstructor(CreadorPaleta constructor) {
 		this.constructor = constructor;
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	
 	

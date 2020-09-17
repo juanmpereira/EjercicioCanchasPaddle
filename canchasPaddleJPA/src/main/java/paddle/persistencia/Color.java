@@ -9,8 +9,9 @@ import javax.persistence.*;
 @Table(name="color")
 public class Color {
 		
-	@Id @GeneratedValue
-    private Long id;
+	@Id 
+	@Column(name="color_codigo")
+    private int codigo;
 	
 	@Column(name="color_desc")
 	private String descripcion;
@@ -23,6 +24,14 @@ public class Color {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 	
-	
+		
 }

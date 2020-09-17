@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class CreadorPaleta {
 	
 	@Id
+	@JoinColumn(name="codigo")
 	private int codigo;
 	
 	@Column(name="creador_nombre")

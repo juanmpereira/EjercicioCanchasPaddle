@@ -13,8 +13,9 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 @Table(name="Jugador")
 public class Jugador {
 	
-	@Id @GeneratedValue
-    private Long id;
+	@Id 
+	@Column(name="jugador_id")
+    private int id;
 
 	@Column(name="jugador_nombre")
 	private String nombre;
@@ -29,16 +30,12 @@ public class Jugador {
 	@Column(name="jugador_fecha_nacimiento")
 	private Date fechaNaciemiento;
 
-	@ManyToMany
-	@JoinTable(name = "participantes")
-	private List<Paleta> paletas;
-
-	public Jugador(String nombre, String apellido, String direccion, Date fechaNaciemiento, List<Paleta> paletas) {
+	public Jugador(int id,String nombre, String apellido, String direccion, Date fechaNaciemiento) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
 		this.fechaNaciemiento = fechaNaciemiento;
-		this.paletas = paletas;
+		this.id=id;
 	}
 
 	public String getNombre() {
@@ -73,14 +70,12 @@ public class Jugador {
 		this.fechaNaciemiento = fechaNaciemiento;
 	}
 
-	public List<Paleta> getPaletas() {
-		return paletas;
+	public int getId() {
+		return id;
 	}
 
-	public void setPaleta(Paleta paleta) {
-		this.paletas = paletas;
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	
 	
 }

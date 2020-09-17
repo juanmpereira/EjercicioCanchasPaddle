@@ -6,8 +6,9 @@ import javax.persistence.*;
 @Table(name = "cancha")
 public class Cancha {
 	
-	@Id @GeneratedValue
-    private Long id;
+	@Id 
+	@Column(name="cancha_id")
+    private int id;
 	
 	@Column(name="cancha_ilumniacion")
 	private int tieneIluminacion;
@@ -16,9 +17,8 @@ public class Cancha {
 	private String nombre;
 	
 	@ManyToOne
+	@JoinColumn(name="cancha_color") //MIRAR SI IRIA ACA O EN COLOR O COMO HACER
 	private Color color;
-
-	
 
 	public int getTieneIluminacion() {
 		return tieneIluminacion;
@@ -43,5 +43,14 @@ public class Cancha {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }
